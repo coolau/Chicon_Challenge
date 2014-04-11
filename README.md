@@ -1,4 +1,4 @@
 Chicon_Challenge
 ================
 
-Challenges for Ruby class by CoderVox
+Ruby class Challenges by CoderVox
