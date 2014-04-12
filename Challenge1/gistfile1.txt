@@ -1,0 +1,325 @@
+Challenge Set 1 - Coder Vox Session 2
+=====================================
+
+Each problem should have its own file. The file for Problem 1 should be named
+prob1.rb, Problem 2 should be prob2.rb, and so on.
+
+Problem 1
+---------
+
+Create a program that prompts the user for the following information:
+
+    * name
+    * age
+    * email address
+    * shipping address
+    * city
+    * state
+    * zip code
+
+Store these values in appropriately named variables. Use string interpolation to
+display these values back to the user. The output should appear similar to the
+following:
+
+    ===============================
+    User information
+    ===============================
+
+    Name: Joseph McCullough
+    Age: 22
+    Email Address: joequery@countermail.com
+    Address: 1234 Some Street
+    City: Austin
+    State: TX
+    Zip Code: 78705
+
+
+Problem 2
+---------
+
+Suppose you have a ceiling fan which has four fan speeds: 0, 1, 2, 3. The
+speeds are changed by pulling a chain, which advances the fan speed by one.
+Pulling the chain when the fan is on 0 advances the fan to 1. Similarly, 1
+advances to 2, 2 advances to 3, and 3 advances back to 0. Suppose the
+fan is currently on 1, and you compulsively pull the chain 373 times. What
+speed will the fan end on?
+
+Problem 3
+---------
+
+Copy your solution to problem 2 to a new file. Alter the program to prompt the
+user for the starting speed of our 4-speed fan, and for the number of times the
+chain will be pulled. 
+
+Problem 4
+---------
+
+The following code below generates a random decimal number between 0 and 1, and
+stores that value in the variable `rnd_float`.
+
+    rnd_float = Random.new().rand()
+
+Observe that multiplying by powers of 10 moves the decimal point over
+
+    irb(main):080:0> rnd_float
+    => 0.21424471916314858
+    irb(main):081:0> rnd_float * 10
+    => 2.1424471916314856
+    irb(main):082:0> rnd_float * 100
+    => 21.424471916314857
+    irb(main):083:0> rnd_float * 1000
+    => 214.24471916314857
+
+Use the examples above along with your knowledge of truncation and modular
+arithmetic to create a dice program that prints out a random integer between 1
+and 6.
+
+Problem 5
+---------
+
+A cryptographic hash function is a function intended to take sensitive
+plaintext information, such as a user's password, and return an obfuscated and
+theoretically irreversible representation of that plaintext information. This
+representation of the plaintext is called the hash value. Web applications take
+advantage of cryptographic hash functions by storing and comparing against the
+hash value of user passwords. The following procedure occurs:
+
+1. When the user first registers, apply the hash function to the plaintext
+   password, and store the hash value in the database.
+2. When the user attempts to sign in, compare the hash function of the
+   password guess against the values stored in the database.
+3. If the hash value of the password guess equals the value stored in the database,
+   it can be assumed that the value entered in the login form was the original
+   plaintext password.
+
+
+By following this procedure, any attackers that somehow gain access to the
+database will not be able to recover user passwords: Knowing the hash value is
+not sufficient to give you the plaintext!
+
+However, a weak hash function may be vulnerable to *collisions*. A collision
+occurs when the result of hashing two different plaintext values results in the
+same hash value. This means that an incorrect password guess could still result
+in successful login. This is because only the hashed values of the original
+password and the password guesses are compared, not the plaintext (remember, the
+plaintext is not stored in the database)
+
+Suppose you are a hacker, and you have gained access to both a web application's
+database and the source code. You find a method called `hashit`, which appears
+to be an extremely naive attempt at a custom cryptographic hash function
+
+The following is a full program which demonstrates how to call the hashit method
+you found to see the resulting hash values of plaintext password guesses:
+
+    def hashit(plaintext)
+        sum = 0
+        plaintext.each_char do |c|
+            sum += (c.ord)
+        end
+        return (sum % 255)*100
+    end
+
+    hash1 = hashit("password123")
+    hash2 = hashit("password124")
+    hash3 = hashit("pbssword124")
+
+    puts hash1
+    puts hash2
+    puts hash3
+
+Paste this program into a file, and observe the results.
+
+You discover your greatest enemy has an account with this web application, and
+their password hash value is 21900. Find a plaintext password that will grant a
+successful login to your greatest enemy's account. (In cryptography, this is
+known as a preimage attack.)
+
+HINT: Observe the effects altering the values in the example has on the hash
+value.
+
+Problem 6
+---------
+
+Create a simple calculator that prompts the user for degrees in Fahrenheit and
+displays the temperature converted to Celsius.
+
+Problem 7
+---------
+
+Create a program that initially assigns x=5 and y=10. Using variables only, swap
+the values of x and y, and then print their new values.
+
+
+Problem 8
+-----------
+
+Create a program prompts for both a student's name and the grade they made on
+a test. Letter grade scales for the class are as follows:
+
+    90-100 is an A
+    80-89 is a B
+    70-79 is a C
+    0-69 is an F
+
+Have the program print out the student's name, their grade, and their letter
+grade. Aside from the prompts, there should only be one line of code
+containing a print statement - make use concatenation / interpolation.
+
+The sentence should resemble the following:
+
+    "Joseph scored 72, a C"
+
+Problem 9
+-----------
+
+Copy and paste the following ruby program into a file, and run it
+
+    def is_even?(x)
+        if (x % 2 == 0)
+            return true
+        else
+            return false
+        end
+    end
+
+    def assert(expected, given)
+        raise "is_even method is incorrect" unless expected == given
+    end
+
+    assert(true, is_even?(6))
+    assert(false, is_even?(5))
+    assert(false, is_even?(9))
+    assert(true, is_even?(2))
+    assert(false, is_even?(1))
+
+    puts "is_even method works correctly!"
+
+The output of the program should be
+
+    is_even method works correctly!
+
+As indicated by the name of the method, is_even? returns boolean true if the
+number x is even, and returns boolean false if the number is not even.
+However, the is_even? method can be written much more concisely. Rewrite the
+is_even? method so the method body (everything in between the `def` and the
+`end` statements) consists of a single return statement. If your method is
+correct, you will see the following upon running it:
+
+    is_even method works correctly!
+
+If your method is incorrect, you will see a message resembling the following:
+
+    iseven.rb:2:in `assert': is_even function is incorrect (RuntimeError)
+            from iseven.rb:15:in `<main>'
+
+Problem 10
+-----------
+
+### Definition: Prime number
+
+A prime number is an integer > 1 that is only divisible by 1 and itself.
+Examples include 2, 3, 5, 7, 11, 13
+
+Prime numbers are the basis of public-key cryptography, a mechanism for
+securely transporting information. The widely used RSA cryptosystem hinges
+upon the fact that it is extremely time consuming to factor two large prime
+numbers multiplied together. To demonstrate this, we will construct a method
+`is_prime?(x)` which returns boolean true if the integer `x` is prime, and
+boolean false otherwise.
+
+Your algorithm for `is_prime?(x)` should generalize the following examples.
+
+Suppose we want to know if the integer 5 is prime.
+
+Step 1) Start from 2 (since 5 divisible by 1 does not disprove primality)  
+Step 2) Does 2 divide 5 evenly? In other words, does 5/2 have no remainder? No  
+Step 3) Does 3 divide 5 evenly? No  
+Step 4) Does 4 divide 5 evenly? No  
+Step 5) Since we have verified that all numbers between 2 and 4 do not divide
+5 evenly, 5 must be a prime number.
+
+Suppose we want to know if the integer 9 is prime.
+
+Step 1) Start from 2 (since 9 divisible by 1 does not disprove primality)  
+Step 2) Does 2 divide 9 evenly? No  
+Step 3) Does 3 divide 9 evenly? Yes! 9/3 = 3 with no remainder.  
+Step 4) Since 3 divides 9 evenly, we can conclude that 9 is not prime. There  
+        is no need to loop over the remaining numbers.
+
+Similar to challenge 8, paste the following into a new file. Your job is to
+fill in the `is_prime?` method with your algorithm.
+
+    def is_prime?(x)
+        ##############
+        # Edit here
+        ##############
+    end
+
+    def assert(expected, given)
+        raise "is_prime method is incorrect" unless expected == given
+    end
+
+    assert(true, is_prime?(2))
+    assert(true, is_prime?(3))
+    assert(true, is_prime?(421))
+    assert(false, is_prime?(1099))
+    assert(true, is_prime?(1549))
+    assert(true, is_prime?(3391))
+    assert(false, is_prime?(3549))
+
+    # Some larger primes now
+    assert(true, is_prime?(1046527))
+    assert(true, is_prime?(16769023))
+
+    puts "is_prime method works correctly!"
+
+If your algorithm is correct, running the program will output
+
+    is_prime method works correctly!
+
+If your method is incorrect, you will see an error message similar to
+
+    isprime.rb:2:in `assert': is_prime function is incorrect (RuntimeError)
+            from isprime.rb:15:in `<main>'
+
+### BONUS
+
+To truly experience how long this primality test can take, time the
+execution of your working program. On my computer, the program finished in 1.5
+seconds. Now, copy the following into a new file and bring over your `is_prime?`
+method. See how long it takes to run.
+
+    def is_prime?(x)
+        ##############
+        # Edit here
+        ##############
+    end
+
+    def assert(expected, given)
+        raise "is_prime method is incorrect" unless expected == given
+    end
+
+    assert(true, is_prime?(1073676287))
+    puts "is_prime method works correctly!"
+
+On my computer, it took 1.5 minutes.  Recommended RSA keys are 2048 bits, which
+comes out to 617 digits! Imagine how long it would take to pass a 617
+digit number to our algorithm if a 10 digit number took 1.5 minutes! That's the
+idea behind RSA - even computers, as fast as they are, cannot determine if there
+is a number that divides such a large a number in a reasonable amount of time.
+
+If you're up for overheating your computer, you're welcome to evaluate the primality
+of 359334085968622831041960188598043661065388726959079837
+
+Problem 11
+------------
+
+FizzBuzz is a classic technical interview problem. Complete the exercise as
+stated below:
+
+> "Write a program that writes the numbers from 1 to 100 to a file. But for
+multiples of three print "Fizz" instead of the number and for the multiples of
+five print "Buzz" For numbers which are multiples of both three and five print
+"FizzBuzz"
+
+Be sure to submit the resulting file
